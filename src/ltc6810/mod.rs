@@ -1,3 +1,4 @@
+
 //! Device-specific types for [LTC6810](<https://www.analog.com/en/products/ltc6810-1.html>)
 use crate::commands::{
     CMD_R_AUX_V_REG_A, CMD_R_AUX_V_REG_B, CMD_R_CELL_V_REG_A, CMD_R_CELL_V_REG_B, CMD_R_CONF_A, CMD_R_STATUS_A,
@@ -10,6 +11,9 @@ use crate::monitor::{
 use core::slice::Iter;
 use embedded_hal::blocking::spi::Transfer;
 use embedded_hal::digital::v2::OutputPin;
+
+pub mod config;
+pub use config::Configuration;
 
 /// Cell selection for ADC conversion
 ///
