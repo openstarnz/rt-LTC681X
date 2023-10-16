@@ -1,8 +1,7 @@
-
 //! Device-specific types for [LTC6810](<https://www.analog.com/en/products/ltc6810-1.html>)
 use crate::commands::{
-    CMD_R_AUX_V_REG_A, CMD_R_AUX_V_REG_B, CMD_R_CELL_V_REG_A, CMD_R_CELL_V_REG_B, CMD_R_CONF_A, CMD_R_STATUS_A,
-    CMD_R_STATUS_B, CMD_W_CONF_A, CMD_W_PWM, CMD_R_PWM,
+    CMD_R_AUX_V_REG_A, CMD_R_AUX_V_REG_B, CMD_R_CELL_V_REG_A, CMD_R_CELL_V_REG_B, CMD_R_CONF_A, CMD_R_PWM,
+    CMD_R_STATUS_A, CMD_R_STATUS_B, CMD_W_CONF_A, CMD_W_PWM,
 };
 use crate::monitor::{
     ADCMode, ChannelIndex, ChannelType, CommandTime, DeviceTypes, GroupedRegisterIndex, NoPolling, NoWriteCommandError,
@@ -101,7 +100,6 @@ impl DeviceTypes for LTC6810 {
     const REG_CONF_B: Option<Self::Register> = None;
 
     const REG_PWM: Self::Register = Register::Pwm;
-
 }
 
 impl<B, CS, const L: usize> LTC681X<B, CS, NoPolling, LTC6810, L>

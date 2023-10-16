@@ -1,5 +1,5 @@
 #[derive(Copy, Clone)]
-pub enum PwmDutyCycle{
+pub enum PwmDutyCycle {
     Off = 0b0000,
     /// 3.3
     _3_3,
@@ -27,11 +27,10 @@ pub enum PwmDutyCycle{
     _43_3,
     /// 46.7
     _46_7,
-    /// 50 
+    /// 50
     _50,
 }
 
-
 pub trait PwmRegisters {
-    fn register_a(&self) -> [u8;6];
+    fn register_a(&self) -> [u8; 6];
 }

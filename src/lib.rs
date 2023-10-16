@@ -53,8 +53,8 @@ pub mod ltc6810;
 pub mod ltc6811;
 pub mod ltc6812;
 pub mod ltc6813;
-pub mod pwm;
 pub mod monitor;
+pub mod pwm;
 
 pub(crate) mod commands;
 pub(crate) mod pec15;

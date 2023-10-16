@@ -1,8 +1,8 @@
 //! Device-specific types for [LTC6812](<https://www.analog.com/en/products/ltc6812-1.html>)
 use crate::commands::{
     CMD_R_AUX_V_REG_A, CMD_R_AUX_V_REG_B, CMD_R_AUX_V_REG_C, CMD_R_AUX_V_REG_D, CMD_R_CELL_V_REG_A, CMD_R_CELL_V_REG_B,
-    CMD_R_CELL_V_REG_C, CMD_R_CELL_V_REG_D, CMD_R_CELL_V_REG_E, CMD_R_CONF_A, CMD_R_CONF_B, CMD_R_STATUS_A,
-    CMD_R_STATUS_B, CMD_W_CONF_A, CMD_W_CONF_B, CMD_R_PWM, CMD_W_PWM,
+    CMD_R_CELL_V_REG_C, CMD_R_CELL_V_REG_D, CMD_R_CELL_V_REG_E, CMD_R_CONF_A, CMD_R_CONF_B, CMD_R_PWM, CMD_R_STATUS_A,
+    CMD_R_STATUS_B, CMD_W_CONF_A, CMD_W_CONF_B, CMD_W_PWM,
 };
 use crate::monitor::{
     ADCMode, ChannelIndex, ChannelType, CommandTime, DeviceTypes, GroupedRegisterIndex, NoPolling, NoWriteCommandError,
@@ -246,7 +246,6 @@ impl GroupedRegisterIndex for Register {
             Register::ConfigurationA => 0,
             Register::ConfigurationB => 1,
             Register::Pwm => 0,
-
         }
     }
 }

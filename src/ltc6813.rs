@@ -253,7 +253,6 @@ impl GroupedRegisterIndex for Register {
             Register::ConfigurationA => 0,
             Register::ConfigurationB => 1,
             Register::Pwm => 0,
-
         }
     }
 }
