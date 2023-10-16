@@ -2,7 +2,7 @@
 //! Device-specific types for [LTC6810](<https://www.analog.com/en/products/ltc6810-1.html>)
 use crate::commands::{
     CMD_R_AUX_V_REG_A, CMD_R_AUX_V_REG_B, CMD_R_CELL_V_REG_A, CMD_R_CELL_V_REG_B, CMD_R_CONF_A, CMD_R_STATUS_A,
-    CMD_R_STATUS_B, CMD_W_CONF_A,
+    CMD_R_STATUS_B, CMD_W_CONF_A, CMD_W_PWM, CMD_R_PWM,
 };
 use crate::monitor::{
     ADCMode, ChannelIndex, ChannelType, CommandTime, DeviceTypes, GroupedRegisterIndex, NoPolling, NoWriteCommandError,
@@ -13,7 +13,9 @@ use embedded_hal::blocking::spi::Transfer;
 use embedded_hal::digital::v2::OutputPin;
 
 pub mod config;
+pub mod pwm;
 pub use config::Configuration;
+pub use pwm::Pwm;
 
 /// Cell selection for ADC conversion
 ///
@@ -57,6 +59,7 @@ pub enum Register {
     StatusA,
     StatusB,
     Configuration,
+    Pwm,
 }
 
 /// All conversion channels
@@ -96,6 +99,9 @@ impl DeviceTypes for LTC6810 {
 
     const REG_CONF_A: Self::Register = Register::Configuration;
     const REG_CONF_B: Option<Self::Register> = None;
+
+    const REG_PWM: Self::Register = Register::Pwm;
+
 }
 
 impl<B, CS, const L: usize> LTC681X<B, CS, NoPolling, LTC6810, L>
@@ -132,12 +138,14 @@ impl ToFullCommand for Register {
             Register::StatusA => CMD_R_STATUS_A,
             Register::StatusB => CMD_R_STATUS_B,
             Register::Configuration => CMD_R_CONF_A,
+            Register::Pwm => CMD_R_PWM,
         }
     }
 
     fn to_write_command(&self) -> Result<[u8; 4], NoWriteCommandError> {
         match self {
             Register::Configuration => Ok(CMD_W_CONF_A),
+            Register::Pwm => Ok(CMD_W_PWM),
             _ => Err(NoWriteCommandError {}),
         }
     }
@@ -201,6 +209,7 @@ impl GroupedRegisterIndex for Register {
             Register::StatusA => 0,
             Register::StatusB => 1,
             Register::Configuration => 0,
+            Register::Pwm => 0,
         }
     }
 }

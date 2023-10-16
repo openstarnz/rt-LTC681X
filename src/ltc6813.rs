@@ -69,6 +69,7 @@ pub enum Register {
     StatusB,
     ConfigurationA,
     ConfigurationB,
+    Pwm,
 }
 
 /// All conversion channels
@@ -125,6 +126,8 @@ impl DeviceTypes for LTC6813 {
 
     const REG_CONF_A: Self::Register = Register::ConfigurationA;
     const REG_CONF_B: Option<Self::Register> = Some(Register::ConfigurationB);
+
+    const REG_PWM: Self::Register = Register::Pwm;
 }
 
 impl<B, CS, const L: usize> LTC681X<B, CS, NoPolling, LTC6813, L>
@@ -168,6 +171,7 @@ impl ToFullCommand for Register {
             Register::StatusB => CMD_R_STATUS_B,
             Register::ConfigurationA => CMD_R_CONF_A,
             Register::ConfigurationB => CMD_R_CONF_B,
+            Register::Pwm => CMD_R_PWM,
         }
     }
 
@@ -175,6 +179,7 @@ impl ToFullCommand for Register {
         match self {
             Register::ConfigurationA => Ok(CMD_W_CONF_A),
             Register::ConfigurationB => Ok(CMD_W_CONF_B),
+            Register::Pwm => Ok(CMD_W_PWM),
             _ => Err(NoWriteCommandError {}),
         }
     }
@@ -247,6 +252,8 @@ impl GroupedRegisterIndex for Register {
             Register::StatusB => 1,
             Register::ConfigurationA => 0,
             Register::ConfigurationB => 1,
+            Register::Pwm => 0,
+
         }
     }
 }

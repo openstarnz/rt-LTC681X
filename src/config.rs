@@ -62,6 +62,12 @@
 //!
 use core::fmt::{Display, Formatter};
 
+pub trait ConfigurationRegisters {
+    fn register_a(&self) -> [u8; 6];
+
+    fn register_b(&self) -> Option<[u8; 6]>;
+}
+
 /// Abstracted configuration of configuration register(s)
 #[derive(Debug, Clone)]
 pub struct Configuration {
@@ -330,6 +336,16 @@ impl Configuration {
     /// timer function will be enabled if the DTEN pin is asserted
     pub fn enable_discharge_monitor(&mut self) {
         self.register_b[1] |= 0b0000_1000;
+    }
+}
+
+impl ConfigurationRegisters for Configuration {
+    fn register_a(&self) -> [u8; 6] {
+        self.register_a
+    }
+
+    fn register_b(&self) -> Option<[u8; 6]> {
+        Some(self.register_b)
     }
 }
 

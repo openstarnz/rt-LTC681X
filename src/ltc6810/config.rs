@@ -1,10 +1,20 @@
-use crate::config::{Cell, DischargeTimeout, VoltageOutOfRangeError, GPIO};
+use crate::config::{Cell, ConfigurationRegisters, DischargeTimeout, VoltageOutOfRangeError, GPIO};
 
 /// Abstracted configuration of configuration register(s)
 #[derive(Debug, Clone)]
 pub struct Configuration {
     /// Computed value of register A
     pub(crate) register_a: [u8; 6],
+}
+
+impl ConfigurationRegisters for Configuration {
+    fn register_a(&self) -> [u8; 6] {
+        self.register_a
+    }
+
+    fn register_b(&self) -> Option<[u8; 6]> {
+        None
+    }
 }
 
 impl Default for Configuration {
@@ -29,7 +39,7 @@ impl Configuration {
             GPIO::GPIO1 => self.register_a[0] &= 0b1111_0111,
             GPIO::GPIO2 => self.register_a[0] &= 0b1110_1111,
             GPIO::GPIO3 => self.register_a[0] &= 0b1101_1111,
-						_ => unimplemented!("unsupported GPIO")
+            _ => unimplemented!("unsupported GPIO"),
         }
     }
 
@@ -39,7 +49,7 @@ impl Configuration {
             GPIO::GPIO1 => self.register_a[0] |= 0b0000_1000,
             GPIO::GPIO2 => self.register_a[0] |= 0b0001_0000,
             GPIO::GPIO3 => self.register_a[0] |= 0b0010_0000,
-						_ => unimplemented!("unsupported GPIO")
+            _ => unimplemented!("unsupported GPIO"),
         }
     }
 
@@ -114,8 +124,7 @@ impl Configuration {
             Cell::Cell4 => self.register_a[4] |= 0b0000_1000,
             Cell::Cell5 => self.register_a[4] |= 0b0001_0000,
             Cell::Cell6 => self.register_a[4] |= 0b0010_0000,
-						_ => unimplemented!("Unsupported cell")
-
+            _ => unimplemented!("Unsupported cell"),
         }
     }
 

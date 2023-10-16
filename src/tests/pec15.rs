@@ -29,6 +29,12 @@ fn test_pec15_two_bytes() {
 
     // Write Configuration register group B
     assert_eq!([0xB1, 0x9E], PEC15::calc(&[0x0, 0x24]));
+
+    // Write Pwm register
+    assert_eq!([0x00, 0x00], PEC15::calc(&[0x0, 0x20]));
+
+    // Read Pwm register
+    assert_eq!([0x9D, 0x56], PEC15::calc(&[0x0, 0x22]));
 }
 
 #[test]

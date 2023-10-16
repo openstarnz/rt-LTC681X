@@ -45,3 +45,9 @@ pub static CMD_W_CONF_A: [u8; 4] = [0x00, 0x1, 0x3D, 0x6E];
 
 /// Precomputed write command for configuration register group B
 pub static CMD_W_CONF_B: [u8; 4] = [0x00, 0x24, 0xB1, 0x9E];
+
+/// Precomputed write command for configuration register group B
+pub static CMD_W_PWM: [u8; 4] = [0x00, 0x20, 0x00, 0x00];
+
+/// Precomputed read command for configuration register group B
+pub static CMD_R_PWM: [u8; 4] = [0x00, 0x22, 0x9D, 0x56];
