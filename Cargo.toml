@@ -15,6 +15,7 @@ documentation = "https://docs.rs/ltc681x"
 embedded-hal = { version = "0.2.7", features = ["unproven"] }
 heapless = "0.7.10"
 fixed = "1.15.0"
+systick-monotonic = "1.0.1"
 
 [dev-dependencies]
 mockall = "0.11.0"
